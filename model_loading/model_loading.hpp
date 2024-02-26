@@ -13,7 +13,7 @@
 #include "glm/glm.hpp"
 
 #include "assimp/scene.h"
-#include "../shader_pipeline/shader_pipeline.hpp"
+#include "../graphics/shader_pipeline/shader_pipeline.hpp"
 
 
 /**

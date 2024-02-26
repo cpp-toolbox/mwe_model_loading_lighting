@@ -5,7 +5,10 @@ project(mwe_model_loading)
 add_executable(mwe_model_loading main.cpp
         camera/camera.cpp
         model_loading/model_loading.cpp
-        shader_pipeline/shader_pipeline.cpp
+        graphics/shader_pipeline/shader_pipeline.cpp
+        mouse/mouse.cpp
+        window/window.cpp
+        graphics/graphics.cpp
 )
 
 # GLAD: opengl function loader
