@@ -14,7 +14,7 @@
 	path = external_libraries/glm
 	url = git@github.com:g-truc/glm.git
 [submodule "shader_pipeline"]
-	path = shader_pipeline
+	path = graphics/shader_pipeline
 	url = git@github.com:opengl-toolbox/shader_pipeline.git
 [submodule "graphics/window"]
 	path = graphics/window
