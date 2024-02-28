@@ -25,3 +25,6 @@
 [submodule "interaction/mouse"]
 	path = interaction/mouse
 	url = git@github.com:opengl-toolbox/mouse.git
+[submodule "graphics/shader_pipeline"]
+	path = graphics/shader_pipeline
+	url = git@github.com:opengl-toolbox/shader_pipeline.git
