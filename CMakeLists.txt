@@ -2,12 +2,13 @@ cmake_minimum_required(VERSION 3.10)
 
 project(mwe_model_loading)
 
-add_executable(mwe_model_loading main.cpp
-        camera/camera.cpp
-        model_loading/model_loading.cpp
+add_executable(mwe_model_loading
+        main.cpp
+        interaction/camera/camera.cpp
+        interaction/mouse/mouse.cpp
+        graphics/model_loading/model_loading.cpp
         graphics/shader_pipeline/shader_pipeline.cpp
-        mouse/mouse.cpp
-        window/window.cpp
+        graphics/window/window.cpp
         graphics/graphics.cpp
 )
 

@@ -1,23 +1,18 @@
-//
-// Created by ccn on 25/02/24.
-//
 #include "glad/gl.h"
 #include "model_loading.hpp"
-
-//#include "../external_libraries/stb_image.h"
 
 #include <iostream>
 
 #include "assimp/Importer.hpp"
 #include <utility>
 #include "assimp/postprocess.h"
-#include "../external_libraries/stb/stb_image.h"
+#include "../../external_libraries/stb/stb_image.h" // todo make this not relative, use include dir.
 
 /**
  * overview:
  * 	initialization:
  * 		first we iterate through the entire assimp imported object recursively
- * 		we store all the iamges we found in the base model, this is the initialization phase.
+ * 		we store all the images we found in the base model, this is the initialization phase.
  *
  * drawing:
  *	iterate through every mesh, load up it's vao and related texture and draw the vertices through the shader pipeline
@@ -66,8 +61,9 @@ void Mesh::bind_vertex_data_to_opengl_for_later_use() {
 };
 
 /**
- * precondition:
- * 	this mesh's VAO is bound
+ * \pre this mesh's vao is bound
+ * \todo this is the wrong way of going about things, a better way
+ *  would be to just load in the shaders we need and make like a model loading shader.
  */
 void Mesh::bind_vertex_attribute_interpretation_to_opengl_for_later_use(ShaderPipeline &shader_pipeline) {
 
@@ -92,7 +88,7 @@ void Mesh::configure_vertex_interpretation_for_shader(ShaderPipeline &shader_pip
     this->bind_vertex_data_to_opengl_for_later_use();
     this->bind_vertex_attribute_interpretation_to_opengl_for_later_use(shader_pipeline);
     // Unbind the current VAO because we're not drawing at this point in time and we don't want anyone else to accidentally while drawing and plus we don't just give functions side effects for no reason.
-    //glBindVertexArray(0);
+    glBindVertexArray(0);
 };
 
 void Model::draw(ShaderPipeline &shader_pipeline) {

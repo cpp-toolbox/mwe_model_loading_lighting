@@ -8,12 +8,12 @@
 
 #include <optional>
 
-#include "camera/camera.hpp"
+#include "interaction/camera/camera.hpp"
 #include "graphics/shader_pipeline/shader_pipeline.hpp"
-#include "model_loading/model_loading.hpp"
-#include "character/character.hpp"
-#include "mouse/mouse.hpp"
-#include "window/window.hpp"
+#include "graphics/model_loading/model_loading.hpp"
+#include "interaction/character/character.hpp"
+#include "interaction/mouse/mouse.hpp"
+#include "graphics/window/window.hpp"
 #include "graphics/graphics.hpp"
 
 // settings

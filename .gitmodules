@@ -16,3 +16,12 @@
 [submodule "shader_pipeline"]
 	path = shader_pipeline
 	url = git@github.com:opengl-toolbox/shader_pipeline.git
+[submodule "graphics/window"]
+	path = graphics/window
+	url = git@github.com:opengl-toolbox/window.git
+[submodule "interaction/camera"]
+	path = interaction/camera
+	url = git@github.com:opengl-toolbox/camera.git
+[submodule "interaction/mouse"]
+	path = interaction/mouse
+	url = git@github.com:opengl-toolbox/mouse.git
