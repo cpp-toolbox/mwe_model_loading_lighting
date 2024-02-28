@@ -6,7 +6,7 @@
 #include "assimp/Importer.hpp"
 #include <utility>
 #include "assimp/postprocess.h"
-#include "../../external_libraries/stb/stb_image.h" // todo make this not relative, use include dir.
+#include "stb_image.h"
 
 /**
  * overview:

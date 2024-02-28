@@ -4,34 +4,30 @@
 #include <glm/glm.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "external_libraries/stb/stb_image.h"
+#include "stb_image.h"
 
 #include <optional>
 
+#include "interaction/character/character.hpp"
 #include "interaction/camera/camera.hpp"
+#include "interaction/mouse/mouse.hpp"
+
 #include "graphics/shader_pipeline/shader_pipeline.hpp"
 #include "graphics/model_loading/model_loading.hpp"
-#include "interaction/character/character.hpp"
-#include "interaction/mouse/mouse.hpp"
 #include "graphics/window/window.hpp"
 #include "graphics/graphics.hpp"
 
-// settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 Character character;
+Camera camera;
 Mouse mouse;
 
-// camera
-Camera camera;
-
-// timing
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
 void on_window_size_change(GLFWwindow* window, int width, int height)
 {
     // make sure the viewport matches the new window dimensions; note that width and
@@ -45,7 +41,6 @@ void on_mouse_move(GLFWwindow* window, double mouse_position_x, double mouse_pos
 }
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
 void process_input(GLFWwindow *window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)

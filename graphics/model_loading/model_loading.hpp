@@ -1,12 +1,5 @@
-//
-// Created by ccn on 25/02/24.
-//
-
-#ifndef MWE_MODEL_LOADING_MODEL_LOADING_HPP
-#define MWE_MODEL_LOADING_MODEL_LOADING_HPP
-
-#ifndef MODEL_LOADING_H
-#define MODEL_LOADING_H
+#ifndef MODEL_LOADING_HPP
+#define MODEL_LOADING_HPP
 
 #include <string>
 #include <vector>
@@ -99,6 +92,5 @@ private:
     std::tuple<bool, int> texture_already_loaded(aiString texture_path);
     std::vector<Texture> load_material_textures(aiMaterial *material, aiTextureType texture_type, std::string type_name);
 };
-#endif
 
-#endif //MWE_MODEL_LOADING_MODEL_LOADING_HPP
+#endif //MODEL_LOADING_HPP
