@@ -4,51 +4,26 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(mwe_model_loading)
 
 add_executable(mwe_model_loading
-        main.cpp
-        interaction/camera/camera.cpp
-        interaction/mouse/mouse.cpp
-        graphics/model_loading/model_loading.cpp
-        graphics/shader_pipeline/shader_pipeline.cpp
-        graphics/window/window.cpp
-        graphics/graphics.cpp
+        src/main.cpp
+
+        src/interaction/camera/camera.cpp
+        src/interaction/mouse/mouse.cpp
+
+        src/graphics/textured_model_loading/textured_model_loading.cpp
+        src/graphics/shader_pipeline/shader_pipeline.cpp
+        src/graphics/window/window.cpp
+        src/graphics/graphics.cpp
+
+        src/utils/fixed_frequency_loop/fixed_frequency_loop.cpp
+        src/utils/fixed_frequency_loop/stopwatch/stopwatch.cpp
+
+        src/graphics/shaders/CWL_uniform_binder_camera_pov.cpp
 )
 
-# GLAD: opengl function loader
+find_package(glfw3)
+find_package(glad)
+find_package(glm)
+find_package(assimp)
+find_package(stb)
 
-include_directories(external_libraries/glad_opengl_3.3_core/include)
-add_subdirectory(external_libraries/glad_opengl_3.3_core)
-
-# GLM: opengl mathematics
-
-include_directories(external_libraries/glm)
-add_subdirectory(external_libraries/glm)
-
-# GLFW: opengl framework
-
-# disable unnessary steps in build
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-
-# ASSIMP: Asset Importer
-
-# only use obj to speed up compilation
-set(ASSIMP_INSTALL OFF CACHE BOOL "" FORCE)
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
-set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(ASSIMP_NO_EXPORT OFF CACHE BOOL "" FORCE)
-set(ASSIMP_BUILD_ALL_EXPORTERS_BY_DEFAULT OFF CACHE BOOL "" FORCE)
-set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE BOOL "" FORCE)
-set(ASSIMP_BUILD_OBJ_IMPORTER ON CACHE BOOL "" FORCE)
-
-# STB_H: single file libraries
-include_directories(external_libraries/stb)
-
-
-
-include_directories(external_libraries/assimp/include)
-add_subdirectory(external_libraries/assimp)
-
-add_subdirectory(external_libraries/glfw)
-
-target_link_libraries(mwe_model_loading glfw glad assimp)
+target_link_libraries(${PROJECT_NAME} glfw glad::glad glm::glm assimp::assimp stb::stb)

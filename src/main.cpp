@@ -1,129 +1,88 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include <glad/gl.h>
+#include <glad/glad.h>
 
 #include <glm/glm.hpp>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
 #include <optional>
+#include <iostream>
 
 #include "interaction/camera/camera.hpp"
 #include "interaction/character/character.hpp"
 #include "interaction/mouse/mouse.hpp"
 
 #include "graphics/graphics.hpp"
-#include "graphics/model_loading/model_loading.hpp"
+#include "graphics/textured_model_loading/textured_model_loading.hpp"
 #include "graphics/shader_pipeline/shader_pipeline.hpp"
 #include "graphics/window/window.hpp"
 
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+#include "utils/fixed_frequency_loop/fixed_frequency_loop.hpp"
 
-Character character;
-Camera camera;
-Mouse mouse;
+unsigned int SCR_WIDTH = 800;
+unsigned int SCR_HEIGHT = 600;
+int tick_rate_hz = 60;
 
-float deltaTime = 0.0f;
-float lastFrame = 0.0f;
+void update_player_state(double delta_time, LiveInputState &live_input_state, Mouse &mouse, Camera &camera, Character &character) {
+    auto [change_in_yaw_angle, change_in_pitch_angle] =  mouse.get_yaw_pitch_deltas(live_input_state.mouse_position_x, live_input_state.mouse_position_y);
+    camera.update_look_direction(change_in_yaw_angle, change_in_pitch_angle);
 
-// glfw: whenever the window size changed (by OS or user resize) this callback
-// function executes
-void on_window_size_change(GLFWwindow *window, int width, int height) {
-  // make sure the viewport matches the new window dimensions; note that width
-  // and height will be significantly larger than specified on retina displays.
-  glViewport(0, 0, width, height);
+    glm::vec3 strafe_direction =
+            glm::cross(camera.look_direction, camera.up_direction);
+
+    auto float_delta_time = (float) delta_time;
+
+    if (live_input_state.forward_pressed)
+        character.position += camera.look_direction * float_delta_time;
+    if (live_input_state.backward_pressed)
+        character.position -= camera.look_direction * float_delta_time;
+    if (live_input_state.left_pressed)
+        character.position -= strafe_direction * float_delta_time;
+    if (live_input_state.right_pressed)
+        character.position += strafe_direction * float_delta_time;
+
 }
 
-void on_mouse_move(GLFWwindow *window, double mouse_position_x,
-                   double mouse_position_y) {
-  auto [change_in_yaw_angle, change_in_pitch_angle] =
-      mouse.get_yaw_pitch_deltas(mouse_position_x, mouse_position_y);
-  camera.update_look_direction(change_in_yaw_angle, change_in_pitch_angle);
-}
+std::function<void(double)> game_step_closure(LiveInputState &live_input_state, Mouse &mouse, Camera &camera, Character &character, Model &model, ShaderPipeline &shader_pipeline, GLFWwindow *window) {
+    return [&live_input_state, &mouse, &camera, &character, &shader_pipeline, &model, window](double delta_time) {
+        update_player_state(delta_time, live_input_state, mouse, camera, character);
 
-// process all input: query GLFW whether relevant keys are pressed/released this
-// frame and react accordingly
-void process_input(GLFWwindow *window) {
-  if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-    glfwSetWindowShouldClose(window, true);
+        render(shader_pipeline.shader_program_id, model, character, camera, SCR_WIDTH, SCR_HEIGHT);
+        glfwSwapBuffers(window);
+        glfwPollEvents();
 
-  glm::vec3 strafe_direction =
-      glm::cross(camera.look_direction, camera.up_direction);
+    };
 
-  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-    character.position += camera.look_direction * deltaTime;
-  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-    character.position -= camera.look_direction * deltaTime;
-  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-    character.position += strafe_direction * deltaTime;
-  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-    character.position -= strafe_direction * deltaTime;
-}
-
-struct InitializationData {
-  ShaderPipeline shader_pipeline;
-  Model model;
-  GLFWwindow *window;
-};
-
-std::optional<InitializationData> initialize() {
-
-  auto optional_window =
-      initialize_glfw_and_return_window(SCR_WIDTH, SCR_HEIGHT);
-
-  if (!optional_window.has_value()) {
-    return std::nullopt;
-  }
-
-  GLFWwindow *window = optional_window.value();
-
-  glfwSetFramebufferSizeCallback(window, on_window_size_change);
-  glfwSetCursorPosCallback(window, on_mouse_move);
-  mouse.configure_with_glfw(window);
-
-  glEnable(GL_DEPTH_TEST); // configure global opengl state
-
-  ShaderPipeline shader_pipeline;
-  shader_pipeline.load_in_shaders_from_file(
-      "../graphics/shaders/matrix_transformation.vert",
-      "../graphics/shaders/textured.frag"); // build and compile shaders
-
-  Model model;
-  model.load_model("../assets/backpack/backpack.obj");
-  model.configure_vertex_interpretation_for_shader(shader_pipeline);
-
-  //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // draw in wireframe
-
-  InitializationData initialization_data = {shader_pipeline, model, window};
-
-  return initialization_data;
 }
 
 int main() {
 
-  std::optional<InitializationData> id = initialize();
+    Character character;
+    Camera camera;
+    Mouse mouse;
 
-  if (!id.has_value()) {
-    return -1;
-  }
-  auto [shader_pipeline, model, window] = id.value();
+    LiveInputState live_input_state;
+    GLFWwindow *window = initialize_glfw_glad_and_return_window(&SCR_HEIGHT, &SCR_HEIGHT, "mwe model loading", true, true, false, &live_input_state);
 
-  while (!glfwWindowShouldClose(window)) {
-    // per-frame time logic
-    float currentFrame = static_cast<float>(glfwGetTime());
-    deltaTime = currentFrame - lastFrame;
-    lastFrame = currentFrame;
+    glEnable(GL_DEPTH_TEST); // configure global opengl state
 
-    process_input(window);
-    render(shader_pipeline, model, character, camera, SCR_WIDTH, SCR_HEIGHT);
+    ShaderPipeline shader_pipeline{};
+    shader_pipeline.load_in_shaders_from_file(
+            "../../src/graphics/shaders/CWL_v_transformation_with_texture_position_passthrough.vert",
+            "../../src/graphics/shaders/textured.frag"); // build and compile shaders
 
-    // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved
-    // etc.)
-    glfwSwapBuffers(window);
-    glfwPollEvents();
-  }
+    Model model("../../assets/backpack/backpack.obj", shader_pipeline.shader_program_id);
+
+    //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // draw in wireframe
+
+    FixedFrequencyLoop game_loop;
+
+    std::function<int()>  termination = [window]() {
+         return glfwWindowShouldClose(window);
+    };
+
+    std::function<void(double)> game_step = game_step_closure(live_input_state, mouse, camera, character, model, shader_pipeline, window);
+
+    game_loop.start(tick_rate_hz, game_step, termination);
 
   glfwTerminate(); // glfw: terminate, clearing all previously allocated GLFW
                    // resources.

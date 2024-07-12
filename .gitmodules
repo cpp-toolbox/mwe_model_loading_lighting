@@ -19,3 +19,6 @@
 [submodule "clang_formatting"]
 	path = clang_formatting
 	url = git@github.com:cpp-toolbox/clang_formatting.git
+[submodule "src/graphics/shaders"]
+	path = src/graphics/shaders
+	url = git@github.com:cpp-toolbox/shaders.git
