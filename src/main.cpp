@@ -14,7 +14,6 @@
 #include "graphics/graphics.hpp"
 #include "graphics/render_primitives/div_collection.hpp"
 #include "graphics/textured_model_loading/textured_model_loading.hpp"
-#include "graphics/shader_pipeline/shader_pipeline.hpp"
 #include "graphics/shader_cache/shader_cache.hpp"
 #include "graphics/window/window.hpp"
 
@@ -84,7 +83,7 @@ int main() {
     OpenGLTextureCache gl_texture_cache;
 
     TexturedModelLoader tmdldr;
-    TexturedModel model = tmdldr.load_model("../../assets/backpack/backpack.obj");
+    TexturedModel model = tmdldr.load_model("assets/backpack/backpack.obj");
 
     DiffuseTexturedDivCollection dtdc = DiffuseTexturedDivCollection(ShaderType::CWL_V_TRANSFORMATION_WITH_TEXTURES,
                                                                      model, shader_cache, gl_texture_cache);

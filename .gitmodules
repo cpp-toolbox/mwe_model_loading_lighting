@@ -1,9 +1,6 @@
 [submodule "src/graphics/window"]
 	path = src/graphics/window
 	url = git@github.com:cpp-toolbox/window.git
-[submodule "src/graphics/shader_pipeline"]
-	path = src/graphics/shader_pipeline
-	url = git@github.com:cpp-toolbox/shader_pipeline.git
 [submodule "src/interaction/camera"]
 	path = src/interaction/camera
 	url = git@github.com:cpp-toolbox/camera.git
@@ -16,9 +13,6 @@
 [submodule "clang_formatting"]
 	path = clang_formatting
 	url = git@github.com:cpp-toolbox/clang_formatting.git
-[submodule "src/graphics/shaders"]
-	path = src/graphics/shaders
-	url = git@github.com:cpp-toolbox/shaders.git
 [submodule "scripts/cpp_tbx_submodule_adder"]
 	path = scripts/cpp_tbx_submodule_adder
 	url = git@github.com:cpp-toolbox/cpp_tbx_submodule_adder.git
@@ -58,3 +52,6 @@
 [submodule "src/utils/model_loading"]
 	path = src/utils/model_loading
 	url = git@github.com:cpp-toolbox/model_loading.git
+[submodule "assets/shaders"]
+	path = assets/shaders
+	url = git@github.com:cpp-toolbox/shaders.git
