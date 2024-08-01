@@ -1,0 +1,1 @@
+- 2024-08-01: Updated the architecture to decouple model loading and textured model loading with improvements to shader handling as well

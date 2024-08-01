@@ -13,12 +13,48 @@
 [submodule "src/graphics/textured_model_loading"]
 	path = src/graphics/textured_model_loading
 	url = git@github.com:cpp-toolbox/textured_model_loading.git
-[submodule "src/utils/fixed_frequency_loop"]
-	path = src/utils/fixed_frequency_loop
-	url = git@github.com:cpp-toolbox/fixed_frequency_loop.git
 [submodule "clang_formatting"]
 	path = clang_formatting
 	url = git@github.com:cpp-toolbox/clang_formatting.git
 [submodule "src/graphics/shaders"]
 	path = src/graphics/shaders
 	url = git@github.com:cpp-toolbox/shaders.git
+[submodule "scripts/cpp_tbx_submodule_adder"]
+	path = scripts/cpp_tbx_submodule_adder
+	url = git@github.com:cpp-toolbox/cpp_tbx_submodule_adder.git
+[submodule "scripts/sbpt"]
+	path = scripts/sbpt
+	url = git@github.com:cpp-toolbox/sbpt.git
+[submodule "src/utils/fixed_frequency_loop"]
+	path = src/utils/fixed_frequency_loop
+	url = git@github.com:cpp-toolbox/fixed_frequency_loop.git
+[submodule "src/utils/stopwatch"]
+	path = src/utils/stopwatch
+	url = git@github.com:cpp-toolbox/stopwatch.git
+[submodule "src/utils/client_systems_namespace"]
+	path = src/utils/client_systems_namespace
+	url = git@github.com:cpp-toolbox/client_systems_namespace.git
+[submodule "src/utils/spdlog_setup"]
+	path = src/utils/spdlog_setup
+	url = git@github.com:cpp-toolbox/spdlog_setup.git
+[submodule "src/graphics/render_primitives"]
+	path = src/graphics/render_primitives
+	url = git@github.com:cpp-toolbox/render_primitives.git
+[submodule "src/utils/texture_loader"]
+	path = src/utils/texture_loader
+	url = git@github.com:cpp-toolbox/texture_loader.git
+[submodule "src/utils/opengl_texture_cache"]
+	path = src/utils/opengl_texture_cache
+	url = git@github.com:cpp-toolbox/opengl_texture_cache.git
+[submodule "scripts/cpp_project_html_viewer"]
+	path = scripts/cpp_project_html_viewer
+	url = git@github.com:cpp-toolbox/cpp_project_html_viewer.git
+[submodule "src/graphics/shader_cache"]
+	path = src/graphics/shader_cache
+	url = git@github.com:cpp-toolbox/shader_cache.git
+[submodule "scripts/process_changes_in_submodules"]
+	path = scripts/process_changes_in_submodules
+	url = git@github.com:cpp-toolbox/process_changes_in_submodules.git
+[submodule "src/utils/model_loading"]
+	path = src/utils/model_loading
+	url = git@github.com:cpp-toolbox/model_loading.git
