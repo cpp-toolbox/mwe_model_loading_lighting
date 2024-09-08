@@ -55,3 +55,6 @@
 [submodule "assets/shaders"]
 	path = assets/shaders
 	url = git@github.com:cpp-toolbox/shaders.git
+[submodule "src/input/glfw_lambda_callback_manager"]
+	path = src/input/glfw_lambda_callback_manager
+	url = git@github.com:cpp-toolbox/glfw_lambda_callback_manager.git
