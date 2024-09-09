@@ -10,15 +10,6 @@
 [submodule "src/graphics/textured_model_loading"]
 	path = src/graphics/textured_model_loading
 	url = git@github.com:cpp-toolbox/textured_model_loading.git
-[submodule "clang_formatting"]
-	path = clang_formatting
-	url = git@github.com:cpp-toolbox/clang_formatting.git
-[submodule "scripts/cpp_tbx_submodule_adder"]
-	path = scripts/cpp_tbx_submodule_adder
-	url = git@github.com:cpp-toolbox/cpp_tbx_submodule_adder.git
-[submodule "scripts/sbpt"]
-	path = scripts/sbpt
-	url = git@github.com:cpp-toolbox/sbpt.git
 [submodule "src/utils/fixed_frequency_loop"]
 	path = src/utils/fixed_frequency_loop
 	url = git@github.com:cpp-toolbox/fixed_frequency_loop.git
@@ -40,15 +31,9 @@
 [submodule "src/utils/opengl_texture_cache"]
 	path = src/utils/opengl_texture_cache
 	url = git@github.com:cpp-toolbox/opengl_texture_cache.git
-[submodule "scripts/cpp_project_html_viewer"]
-	path = scripts/cpp_project_html_viewer
-	url = git@github.com:cpp-toolbox/cpp_project_html_viewer.git
 [submodule "src/graphics/shader_cache"]
 	path = src/graphics/shader_cache
 	url = git@github.com:cpp-toolbox/shader_cache.git
-[submodule "scripts/process_changes_in_submodules"]
-	path = scripts/process_changes_in_submodules
-	url = git@github.com:cpp-toolbox/process_changes_in_submodules.git
 [submodule "src/utils/model_loading"]
 	path = src/utils/model_loading
 	url = git@github.com:cpp-toolbox/model_loading.git
@@ -58,3 +43,6 @@
 [submodule "src/input/glfw_lambda_callback_manager"]
 	path = src/input/glfw_lambda_callback_manager
 	url = git@github.com:cpp-toolbox/glfw_lambda_callback_manager.git
+[submodule "scripts"]
+	path = scripts
+	url = git@github.com:cpp-toolbox/scripts.git
