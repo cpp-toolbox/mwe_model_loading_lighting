@@ -4,6 +4,6 @@
 #include "../interaction/character/character.hpp"
 #include "render_primitives/divplo_collection.hpp"
 
-void render(ShaderCache &shader_cache, DivplodtCollection &model, Character &character, Camera &camera, int screen_width, int screen_height);
+void render(ShaderCache &shader_cache, DivplodtnCollection &model, Character &character, Camera &camera, int screen_width, int screen_height);
 
 #endif // MWE_MODEL_LOADING_GRAPHICS_HPP

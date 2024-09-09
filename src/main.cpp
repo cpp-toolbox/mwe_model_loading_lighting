@@ -49,7 +49,7 @@ void update_player_state(double delta_time, LiveInputState &live_input_state, Mo
 }
 
 std::function<void(double)> game_step_closure(LiveInputState &live_input_state, Mouse &mouse, Camera &camera,
-                                              Character &character, DivplodtCollection &model,
+                                              Character &character, DivplodtnCollection &model,
                                               ShaderCache &shader_cache, GLFWwindow *window) {
     return [&live_input_state, &mouse, &camera, &character, &shader_cache, &model, window](double delta_time) {
         update_player_state(delta_time, live_input_state, mouse, camera, character);
@@ -136,7 +136,7 @@ int main() {
 
     glEnable(GL_DEPTH_TEST); // configure global opengl state
 
-    std::vector<ShaderType> requested_shaders = {ShaderType::CWL_V_TRANSFORMATION_WITH_TEXTURES_AMBIENT_LIGHTING};
+    std::vector<ShaderType> requested_shaders = {ShaderType::CWL_V_TRANSFORMATION_WITH_TEXTURES_AMBIENT_AND_DIFFUSE_LIGHTING};
 
     ShaderCache shader_cache(requested_shaders);
 
@@ -146,7 +146,7 @@ int main() {
 
     TexturedModel model = tmdldr.load_model("assets/backpack/backpack.obj");
 
-    auto textured_model = DivplodtCollection(ShaderType::CWL_V_TRANSFORMATION_WITH_TEXTURES_AMBIENT_LIGHTING,
+    auto textured_model = DivplodtnCollection(ShaderType::CWL_V_TRANSFORMATION_WITH_TEXTURES_AMBIENT_AND_DIFFUSE_LIGHTING,
                                                                      model, shader_cache, gl_texture_cache);
 
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // draw in wireframe
