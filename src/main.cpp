@@ -136,7 +136,7 @@ int main() {
 
     glEnable(GL_DEPTH_TEST); // configure global opengl state
 
-    std::vector<ShaderType> requested_shaders = {ShaderType::CWL_V_TRANSFORMATION_WITH_TEXTURES};
+    std::vector<ShaderType> requested_shaders = {ShaderType::CWL_V_TRANSFORMATION_WITH_TEXTURES_AMBIENT_LIGHTING};
 
     ShaderCache shader_cache(requested_shaders);
 
@@ -146,10 +146,10 @@ int main() {
 
     TexturedModel model = tmdldr.load_model("assets/backpack/backpack.obj");
 
-    auto textured_model = DivplodtCollection(ShaderType::CWL_V_TRANSFORMATION_WITH_TEXTURES,
+    auto textured_model = DivplodtCollection(ShaderType::CWL_V_TRANSFORMATION_WITH_TEXTURES_AMBIENT_LIGHTING,
                                                                      model, shader_cache, gl_texture_cache);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // draw in wireframe
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // draw in wireframe
 
     FixedFrequencyLoop game_loop;
 
